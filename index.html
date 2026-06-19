@@ -1,1 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
 
+<meta charset="UTF-8">
+
+<title>Teste Leaflet</title>
+
+<!-- CSS do Leaflet -->
+<link 
+rel="stylesheet"
+href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+
+<style>
+#map {
+    height: 500px;
+    width: 800px;
+}
+</style>
+
+
+</head>
+<body>
+<h2>Mapeamento</h2>
+<div id="map"></div>
+
+<!-- JS do Leaflet -->
+<script 
+src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+
+<script>
+// cria o mapa
+let map = L.map('map').setView(
+    [-20.4697, -54.6201],
+    13
+);
+
+// adiciona o mapa do OpenStreetMap
+L.tileLayer(
+    'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+    {
+        attribution: '© OpenStreetMap'
+    }
+).addTo(map);
+
+// cria marcador da UBS
+
+let ubs = [
+{
+ nome:"USF Vila Carvalho",
+ lat:-20.475423,
+ lon:-54.622081
+},
+
+{
+ nome:"USF Alves Pereira",
+ lat:-20.527049,
+ lon:-54.602499
+}
+];
+
+ubs.forEach(function(u){
+
+// cria marcador da UBS
+L.marker([
+    u.lat,
+    u.lon
+])
+.addTo(map)
+.bindPopup(
+    u.nome
+);
+});
+
+</script>
+</body>
+</html>
